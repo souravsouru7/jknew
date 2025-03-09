@@ -57,68 +57,37 @@ const imageVariants = {
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
-      {/* Decorative floating elements */}
-      <motion.div
-        className="absolute top-20 left-10 w-32 h-32 rounded-full bg-[#A89078]/10 -z-1"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-24 h-24 rounded-full bg-[#8B7355]/10 -z-1"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.5, 0.3, 0.5],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
+    <section className="py-12 sm:py-16 md:py-24 bg-white relative overflow-hidden px-4 sm:px-6 lg:px-8">
       <div className="container-width relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-12 sm:mb-20"
         >
-          <span className="font-montserrat text-sm tracking-[0.2em] uppercase text-[#A89078] mb-4 block font-medium">
+          <span className="font-montserrat text-sm tracking-[0.2em] uppercase text-[#A89078] mb-2 sm:mb-4 block font-medium">
             Testimonials
           </span>
-          <h2 className="heading-serif text-4xl md:text-6xl text-[#8B7355] mb-6">
+          <h2 className="heading-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#8B7355] mb-4 sm:mb-6">
             What Our Clients Say
           </h2>
-          <p className="text-body text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-body text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0">
             Hear from our satisfied clients across Hyderabad
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={testimonial.name}
-              initial="initial"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover="hover"
-              viewport={{ once: true }}
-              variants={cardVariants}
-              custom={i}
-              className="bg-gray-50 p-8 rounded-2xl"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="bg-gray-50 p-8 rounded-2xl transition-all"
             >
-              <motion.div 
-                variants={floatingAnimation}
-                className="flex items-center mb-6"
-              >
+              <div className="flex items-center mb-6">
                 <motion.div 
                   className="relative w-16 h-16 rounded-full overflow-hidden"
                   variants={imageVariants}
@@ -141,15 +110,8 @@ export default function Testimonials() {
                     {testimonial.role}
                   </p>
                 </div>
-              </motion.div>
-              <motion.p 
-                className="text-gray-600 italic"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: i * 0.2 }}
-              >
-                "{testimonial.text}"
-              </motion.p>
+              </div>
+              <p className="text-gray-600 italic">{testimonial.text}</p>
               <motion.div 
                 className="mt-6 flex justify-start"
                 initial={{ opacity: 0, x: -20 }}
